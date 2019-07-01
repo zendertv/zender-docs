@@ -3,6 +3,7 @@ After a quiz has finished , payout information is available in the admin and can
 
 To automate this one can retrieve the information to automatically do payments:
 
+
 # To retrieve the payout information
 A payout is related to a quiz where the results have been triggered.
 
@@ -15,3 +16,5 @@ curl --location --request GET "https://api.zender.tv/v1/channels/<channelId>/str
   --header "Content-Type: application/json"
 ```
 
+# To retrieve the quiz winners
+See [Retrieve Quiz Information](QUIZ.md)
