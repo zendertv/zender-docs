@@ -4,7 +4,7 @@ This document describes how to configure your streaming solution to ingest the v
 # Architecture:
  This diagram shows how the zender infrastructure integrates the video signal
 
-![Zender Streaming Diagram](docs/images/zender-streaming-diagram.png?raw=true "Zender Streaming Diagram")
+![Zender Streaming Architecture](docs/images/zender-streaming-architecture.png?raw=true "Zender Streaming Architecture")
 
 The streaming source (camera) needs to be converted to a digital streaming signal.
 
