@@ -2,10 +2,20 @@
 
 This repository contains the overall technical documentation of the Zender Platform:
 
-Specific topics:
-- [Video Streaming Ingest to Zender](STREAM.md)
+## Specific topics:
+
+Streaming:
+- [Video Streaming Ingest to Zender](STREAMING.md)
+
+Authentication:
 - [Authentication](AUTH.md)
 - [Signed Provider](SignedProvider.md)
+
+API:
+- [Retrieve Quiz information](QUIZ.md)
+- [Retrieve Stream information](STREAM.md)
+- [Retrieve Payout information](PAYOUT.md)
+- [Give Extra Lives](EXTRALIVES.md)
 
 # SDK information
 For individual SDK documentation refer to the individiual documentation:
