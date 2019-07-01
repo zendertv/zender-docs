@@ -11,6 +11,9 @@ Authentication:
 - [Authentication](AUTH.md)
 - [Signed Provider](SignedProvider.md)
 
+Analytics:
+- [Analytics tracked](ANALYTICS.md)
+
 API:
 - [Retrieve Quiz information](QUIZ.md)
 - [Retrieve Stream information](STREAM.md)
