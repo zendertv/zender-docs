@@ -47,7 +47,7 @@ Let's say we have user with the following information:
 The signature is based on a mutually agreed signature Template:
 ```
 signature_date = `${new Date().getTime() / 1000}`; // seconds since epoch
-secretDecoded = Buffer.from(secret, "base64"); // secret is base64m first decode it
+secretDecoded = Buffer.from(secret, "base64"); // secret is base64 first decode it
 hmac = crypto.createHmac( "sha1", secretDecoded); // prepare the hmac signing
 hmac.update(`${signature_date}_${token.id}_${token.first_name}_${token.last_name}`);
 signature = hmac.digest(${signature_date}_${token.id}_${token.first_name}_${token.last_name});
