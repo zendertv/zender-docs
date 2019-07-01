@@ -129,7 +129,7 @@ iframe.contentWindow.postMessage('logged-in', '*');
                 element.attachEvent('on' + eventName, eventHandler);
             }
         }
-        var iframeSource = 'https://player2.zender.tv/<targetId>/<channelId>/streams
+        var iframeSource = 'https://player2.zender.tv/<targetId>/<channelId>/streams';
         // Create the iframe
         var iframe = document.createElement('iframe');
         iframe.setAttribute('src', iframeSource);
