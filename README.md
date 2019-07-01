@@ -15,7 +15,10 @@ API:
 - [Retrieve Quiz information](QUIZ.md)
 - [Retrieve Stream information](STREAM.md)
 - [Retrieve Payout information](PAYOUT.md)
+
+Payout:
 - [Give Extra Lives](EXTRALIVES.md)
+- [Payout](PAYOUT.md)
 
 # SDK information
 For individual SDK documentation refer to the individiual documentation:
