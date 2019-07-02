@@ -29,5 +29,5 @@ For individual SDK documentation refer to the individiual documentation:
 - web: [Embed Zender Player in Website](EMBED.md)
 - react native SDK : <https://github.com/zendertv/react-native-zender>
 - API : <https://api-docs.zender.tv>
-- iOS SDK : <https://github.com/zendertv/zender-ios-sdk> (Public soon)
-- android SDK : <https://github.com/zendertv/zender-android-sdk> (Public soon)
+- iOS SDK : <https://github.com/zendertv/zender-ios-sdk>
+- android SDK : <https://github.com/zendertv/zender-android-sdk>
