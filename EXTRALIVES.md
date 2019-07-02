@@ -3,14 +3,14 @@ By default a user can earn *extra lives* when other people redeem that persons n
 Sometimes you want to assign extra lives on other events: for example on signup, on completion of a form, after watching an advertising.
 
 # To assign an extra live to a user
-To increment the user with userId `the-user-id` use:
+To increment the user with shareCode `the-share-code` use:
 
 ```
 curl --location --request POST "https://api.zender.tv/v1/extraLives" -H 'authorization: Bearer <bearerToken>' -H 'content-type: application/json' -H 'accept: application/json' \
 --header "Content-Type: application/json" \
 --header ": " \
 --data "{
-\"userId\": \"<the-user-id>\"
+\"shareCode\": \"<the-share-code>\"
 }"
 ```
 
