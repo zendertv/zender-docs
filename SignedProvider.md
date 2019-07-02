@@ -14,12 +14,12 @@ This diagram explains how the signed provider flow works:
 - The customer endpoint provides the user with a signed token which contains the user information, a signature (using a shared secret) and a timestamp
 
 - This signed token is then passed to the authentication of the Zender Player
-- Then the player starts and the signedToken is send to the Zender Authentication for verification
+- Then the player starts and the signedToken is sent to the Zender Authentication for verification
 
-- The Zender Authentication verifies the signature using a shared secret
-- It cheks that the signature is not too old
-- On succesfull verification it will extract the user information from the token and create a Zender User if it doesn't exist already
-- From then on the Zender Player has succesfully logged in the user and works with it's own Zender Session
+- The Zender Authentication verifies the signature using the shared secret
+- It checks that the signature is not too old
+- On successful verification it will extract the user information from the token and create a Zender User if it doesn't exist already
+- From then on the Zender Player has successfully logged in the user and works with its own Zender Session
 
 # Requirements:
 The Signed Provider needs additional backend configuration.
@@ -50,7 +50,7 @@ signature_date = `${new Date().getTime() / 1000}`; // seconds since epoch
 secretDecoded = Buffer.from(secret, "base64"); // secret is base64 first decode it
 hmac = crypto.createHmac( "sha1", secretDecoded); // prepare the hmac signing
 hmac.update(`${signature_date}_${token.id}_${token.first_name}_${token.last_name}`);
-signature = hmac.digest(${signature_date}_${token.id}_${token.first_name}_${token.last_name});
+signature = hmac.digest(`${signature_date}_${token.id}_${token.first_name}_${token.last_name}`);
 tokenData = {
 	"id":"<some internal customer userId>",
 	"first_name":"Patrick",
