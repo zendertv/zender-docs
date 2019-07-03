@@ -68,7 +68,7 @@ window.addEventListener('load', function(e) {
 });
 ```
 
-## Communicating with the Zender Player
+## Communicating with the Zender Player *(exprimental)*
 
 ### Zender player → website
 
@@ -139,52 +139,3 @@ function getPlayerUrl() {
   return playerUrl;
 }
 ```
-
-
-## Listen to player events (Experimental)
-```html
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Parent Window</title>
-</head>
-<body>
-
-    <h1>Parent Window</h1>
-    <p>Got Message:</p>
-    <div id="results"></div>
-    <br/>
-
-    <script>
-        // addEventListener support for IE8
-        function bindEvent(element, eventName, eventHandler) {
-            if (element.addEventListener){
-                element.addEventListener(eventName, eventHandler, false);
-            } else if (element.attachEvent) {
-                element.attachEvent('on' + eventName, eventHandler);
-            }
-        }
-        var iframeSource = 'https://player2.zender.tv/<targetId>/<channelId>/streams';
-        // Create the iframe
-        var iframe = document.createElement('iframe');
-        iframe.setAttribute('src', iframeSource);
-        iframe.setAttribute('id', 'the_iframe');
-        iframe.style.width = 1024 + 'px';
-        iframe.style.height = 768 + 'px';
-        document.body.appendChild(iframe);
-
-        // Send a message to the child iframe
-        var iframeEl = document.getElementById('the_iframe'),
-            results = document.getElementById('results');
-
-        // Listen to message from child window
-        bindEvent(window, 'message', function (e) {
-            results.innerHTML = JSON.stringify(e.data);
-        });
-    </script>
-</body>
-</html>
-```
-
