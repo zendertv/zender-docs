@@ -15,9 +15,9 @@ This will show the player inside the iframe and will automatically resize.
 Both targetId and channelId will be provided to you on the creation of your Zender account. They can also be found through the Zender admin console.
 
 ### Zender Lobby mechanism
-By default when no streams are public there will nothing to see.
+By default no streams are public and there will be nothing to see.
 You can change this behaviour by creating a *lobby* stream : this stream will be active when no other streams are public.
-The player will switch from lobby and back when another stream becomes public
+The Player will switch from lobby and back when another stream becomes public.
 
 ## Example Code
 Create a `div` element, which will act as a wrapper and add the zender `iframe` into it.
