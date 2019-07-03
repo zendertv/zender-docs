@@ -20,9 +20,9 @@ You can change this behaviour by creating a *lobby* stream : this stream will be
 The player will switch from lobby and back when another stream becomes public
 
 # Example Code
-It all starts with a div element where you add zender iframe into.
-
-Then depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to use a different sizing. (use the correct class)
+Create a `div` element, which will act as a wrapper and add the zender `iframe` into it.
+Depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to use a different sizing.
+Configure either the `zender-frame-wrapper-16-9` or `zender-frame-wrapper-9-16` as a class on the wrapper.
 
 ```html
 <div class="zender-frame-wrapper zender-frame-wrapper-9-16">
@@ -58,6 +58,8 @@ Then depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to
 	bottom: 0;
 }
 ```
+
+Configure the `src` of the `iframe` with some javascript after the [load event](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event). This prevents the player from slowing down other content on the page.
 
 ```javascript
 // Set zender-frame source depending on URL.
