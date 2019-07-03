@@ -105,3 +105,38 @@ window.addEventListener('message', function(e) {
 var iframe = document.getElementById('zender-frame');
 iframe.contentWindow.postMessage('logged-in', '*');
 ```
+
+## Integrating login
+
+*The Zender Player supports social login providers such as Google, Facebook. This section is only applicable if you want to integrate the Player with your own authentication provider*
+
+[Signed provider](SignedProvider.md) is an authentication mechanism that allows you to easily integrate your own existing authentication mechanism. For more details see the [Signed Provider Documentation](SignedProvider.md)
+
+**Example**
+
+In this example, the parent page receives the login data via its own query string; see the `getLoginData` function. 
+The function assumes that the authentication is passed like this : `https://live.yoursite.com?loginData=<signed token>`.
+The login data is then transmitted to the Zender `iframe` in the form of a query string attached to the Player url, see the `getPlayerUrl` function.
+
+```javascript
+function getLoginData() {
+  var queryString = window.location.search.slice(1).split('&');
+  var loginData;
+  var i;
+  for (i = 0; i !== queryString.length; i++) {
+    var lhs = queryString[i].split('=')[0];
+    var rhs = queryString[i].slice(lhs.length + 1);
+    if (lhs === 'loginData') {
+      loginData = rhs;
+    }
+  }
+  return loginData;
+}
+function getPlayerUrl() {
+  var playerUrl = <zenderPlayerUrl>; // without the /streams/<uid>part
+  if (getLoginData()) {
+    return playerUrl + "?loginData=" + getLoginData();
+  }
+  return playerUrl;
+}
+```
