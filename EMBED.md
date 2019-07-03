@@ -2,7 +2,7 @@
 
 Embedding the Zender Player is done by adding an [`iframe`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) to your website.
 
-# Choosing the right Zender player url
+## Choosing the right Zender player url
 
 The easiest way of integrating it to use the following url:
 `https://player2.zender.tv/<targetId>/channels/<channelId>/streams`
@@ -14,12 +14,12 @@ This will show the player inside the iframe and will automatically resize.
 
 Both targetId and channelId will be provided to you on the creation of your Zender account. They can also be found through the Zender admin console.
 
-# Zender Lobby mechanism
+### Zender Lobby mechanism
 By default when no streams are public there will nothing to see.
 You can change this behaviour by creating a *lobby* stream : this stream will be active when no other streams are public.
 The player will switch from lobby and back when another stream becomes public
 
-# Example Code
+## Example Code
 Create a `div` element, which will act as a wrapper and add the zender `iframe` into it.
 Depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to use a different sizing.
 Configure either the `zender-frame-wrapper-16-9` or `zender-frame-wrapper-9-16` as a class on the wrapper.
@@ -68,10 +68,7 @@ window.addEventListener('load', function(e) {
 });
 ```
 
-# Listening to Zender Player events
-
-## Login via iframe messages
-If you are using the cookie provider for your login you can listen for a trigger-login message to execute some code in your surrounding webpage.
+## Communicating with the Zender Player
 
 ### Zender player → website
 
@@ -99,12 +96,50 @@ window.addEventListener('message', function(e) {
 }, false);
 ```
 
-### Website → Zender player
+**Example**
+If you are using the cookie provider for your login you can listen for a `trigger-login` message to execute some code in your surrounding webpage.
+
+### Website → Zender Player
 
 ```javascript
 var iframe = document.getElementById('zender-frame');
 iframe.contentWindow.postMessage('logged-in', '*');
 ```
+
+## Login via signed provider
+
+The Zender Web Player understands social login providers such as Google,Facebook.
+Signed provider is authentication mechanism that allows you to easily integrate your own existing authentication mechanism.
+
+This authentication is passed like this : `https://live.yoursite.com?loginData=<signed token>`
+
+In this case the login data will be parsed by the zender player by examining its query string. In the example here, the parent page also receives the login data via its own query string; see the getLoginData function. The login data is then transmitted to the Zender iframe in the getPlayerUrl function.
+
+For more details see the [Signed Provider Documentation](SignedProvider.md)
+
+```javascript
+function getLoginData() {
+  var queryString = window.location.search.slice(1).split('&');
+  var loginData;
+  var i;
+  for (i = 0; i !== queryString.length; i++) {
+    var lhs = queryString[i].split('=')[0];
+    var rhs = queryString[i].slice(lhs.length + 1);
+    if (lhs === 'loginData') {
+      loginData = rhs;
+    }
+  }
+  return loginData;
+}
+function getPlayerUrl() {
+  var playerUrl = <zenderPlayerUrl>; // without the /streams/<uid>part
+  if (getLoginData()) {
+    return playerUrl + "?loginData=" + getLoginData();
+  }
+  return playerUrl;
+}
+```
+
 
 ## Listen to player events (Experimental)
 ```html
@@ -151,41 +186,5 @@ iframe.contentWindow.postMessage('logged-in', '*');
     </script>
 </body>
 </html>
-
-
 ```
-
-# Logging in via Signed Provider
-The Zender Web Player understands social login providers such as Google,Facebook.
-Signed provider is authentication mechanism that allows you to easily integrate your own existing authentication mechanism.
-
-This authentication is passed like this : `https://live.yoursite.com?loginData=<signed token>`
-
-In this case the login data will be parsed by the zender player by examining its query string. In the example here, the parent page also receives the login data via its own query string; see the getLoginData function. The login data is then transmitted to the Zender iframe in the getPlayerUrl function.
-
-For more details see the [Signed Provider Documentation](SignedProvider.md)
-
-```javascript
-function getLoginData() {
-  var queryString = window.location.search.slice(1).split('&');
-  var loginData;
-  var i;
-  for (i = 0; i !== queryString.length; i++) {
-    var lhs = queryString[i].split('=')[0];
-    var rhs = queryString[i].slice(lhs.length + 1);
-    if (lhs === 'loginData') {
-      loginData = rhs;
-    }
-  }
-  return loginData;
-}
-function getPlayerUrl() {
-  var playerUrl = <zenderPlayerUrl>; // without the /streams/<uid>part
-  if (getLoginData()) {
-    return playerUrl + "?loginData=" + getLoginData();
-  }
-  return playerUrl;
-}
-```
-
 
