@@ -1,10 +1,10 @@
-# Zender Authentication 
+# Zender Authentication
 Zender supports several authentication mechanisms including social logins (Instagram, Youtube, Google, Facebook).
 
 To authenticate a user:
 - Zender will delegate the authentication to an external provider
 - That login provider generates a token
-- That token is send to the Zender Platform
+- That token is sent to the Zender Platform
 - The Zender Platform verifies that token
 - If the token is valid, Zender will either extract the user information from the token or query the login provider for extra user information
 
@@ -89,7 +89,7 @@ User logout:
 - A user can log out via the menu in Zender.
 Note: when a user signs out of the customer website, a user is still logged in Zender
 
-# Sample Authentication Code 
+# Sample Authentication Code
 ## iOS
 ```objective-c
 ZenderAuthentication *authentication = [ZenderAuthentication authenticationWith:@{
