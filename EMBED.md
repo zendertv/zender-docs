@@ -1,6 +1,6 @@
 # Integrate Zender Live Player in own website
 
-Embedding the Zender Player is as easy as adding an iframe to your website.
+Embedding the Zender Player is done by adding an [`iframe`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) to your website.
 
 # Choosing the right Zender player url
 
