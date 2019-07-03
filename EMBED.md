@@ -105,37 +105,3 @@ If you are using the cookie provider for your login you can listen for a `trigge
 var iframe = document.getElementById('zender-frame');
 iframe.contentWindow.postMessage('logged-in', '*');
 ```
-
-## Login via signed provider
-
-The Zender Web Player understands social login providers such as Google,Facebook.
-Signed provider is authentication mechanism that allows you to easily integrate your own existing authentication mechanism.
-
-This authentication is passed like this : `https://live.yoursite.com?loginData=<signed token>`
-
-In this case the login data will be parsed by the zender player by examining its query string. In the example here, the parent page also receives the login data via its own query string; see the getLoginData function. The login data is then transmitted to the Zender iframe in the getPlayerUrl function.
-
-For more details see the [Signed Provider Documentation](SignedProvider.md)
-
-```javascript
-function getLoginData() {
-  var queryString = window.location.search.slice(1).split('&');
-  var loginData;
-  var i;
-  for (i = 0; i !== queryString.length; i++) {
-    var lhs = queryString[i].split('=')[0];
-    var rhs = queryString[i].slice(lhs.length + 1);
-    if (lhs === 'loginData') {
-      loginData = rhs;
-    }
-  }
-  return loginData;
-}
-function getPlayerUrl() {
-  var playerUrl = <zenderPlayerUrl>; // without the /streams/<uid>part
-  if (getLoginData()) {
-    return playerUrl + "?loginData=" + getLoginData();
-  }
-  return playerUrl;
-}
-```
