@@ -1,7 +1,7 @@
 # To retrieve Quiz Information:
 
 ## To retrieve the basic quiz information for all quizes a particular stream
-Using an qdmin/api bearer token you can retrieve all quiz information
+Using an admin/api bearer token you can retrieve all quiz information
 
 ```
 curl -XGET 'https://api.zender.tv/v1/channels/<channelId>/streams/<streamId>/quiz' -H 'content-type: application/json' -H 'authorization: Bearer <bearerToken>' -H 'accept: application/json' | jq
@@ -17,7 +17,7 @@ curl -XGET 'https://api.zender.tv/v1/channels/<channelId>/streams/<streamId>/qui
     "answerTime": 10000,
     "hideTime": 15000,
     "description": "Test",
-    "price": 500, <= the amout of prize money
+    "price": 500, <= the amount of prize money
     "resultsAt": "2018-08-28T15:19:46.402Z", <= indicates if the results have been triggered
     "title": "Test Quiz"
   
@@ -25,14 +25,14 @@ curl -XGET 'https://api.zender.tv/v1/channels/<channelId>/streams/<streamId>/qui
 ```
 
 ## Retrieve quizzes that have finished
-To filter out the quizzes that have finished , filter on streams that have a `resultsAt`
+To filter out the quizzes that have finished , filter on streams that have a `resultsAt` property:
 
 ```
 curl -XGET 'https://api.zender.tv/v1/channels/<channelId>/streams/<streamId>/quiz' -H 'content-type: application/json' -H 'authorization: Bearer <bearerToken>' -H 'accept: application/json' | jq '.[] | select(.resultsAt) | .id'
 ```
 
 ## To retrieve detailed results for a specific Quiz:
-Now that you can find all the quizzes, you can retreive details such as the results of one quiz:
+Now that you can find all the quizzes, you can retrieve details such as the results of one quiz:
 
 ```
 curl -XGET 'https://api.zender.tv/v1/channels/<channelId>/streams/<streamId>/quiz/<quizId>/results' -H 'authorization: Bearer <bearerToken>' -H 'content-type: application/json' -H 'accept: application/json'
