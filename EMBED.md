@@ -25,7 +25,7 @@ It all starts with a div element where you add zender iframe into.
 Then depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to use a different sizing. (use the correct class)
 
 ```html
-<div class="zender-frame-wrapper-9-16">
+<div class="zender-frame-wrapper zender-frame-wrapper-9-16">
 	<iframe src="about:blank" id="zender-frame" width="640" height="360" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 </div>
 ```
