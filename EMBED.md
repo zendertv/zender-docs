@@ -72,6 +72,9 @@ window.addEventListener('load', function(e) {
 
 ### Zender player → website
 
+**Example**
+If you are using the cookie provider for your login you can listen for a `trigger-login` message to execute some code in your surrounding webpage.
+
 ```javascript
 // Listen for incoming messages from zender-frame
 window.addEventListener('message', function(e) {
@@ -95,9 +98,6 @@ window.addEventListener('message', function(e) {
 	}
 }, false);
 ```
-
-**Example**
-If you are using the cookie provider for your login you can listen for a `trigger-login` message to execute some code in your surrounding webpage.
 
 ### Website → Zender Player
 
