@@ -14,8 +14,7 @@ To retrieve the payout you need to:
 - find the quizId - See [Retrieve Quiz Information](QUIZ.md)
 
 ```
-curl --location --request GET "https://api.zender.tv/v1/channels/<channelId>/streams/<streamId>/quiz/<quizId>/leaderboard/win/export" \
-  --header "Content-Type: application/json"
+curl --location --request GET "https://api.zender.tv/v1/channels/<channelId>/streams/<streamId>/quiz/<quizId>/leaderboard/win/export" -H 'authorization: Bearer <bearerToken>' --header "Content-Type: application/json"
 ```
 
 ## To retrieve the quiz winners
