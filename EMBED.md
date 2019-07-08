@@ -1,8 +1,8 @@
 # Integrate Zender Live Player in own website
 
-Embedding the Zender Player is as easy as adding an iframe to your website.
+Embedding the Zender Player is done by adding an [`iframe`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe) to your website.
 
-# Choosing the right Zender player url
+## Choosing the right Zender player url
 
 The easiest way of integrating it to use the following url:
 `https://player2.zender.tv/<targetId>/channels/<channelId>/streams`
@@ -14,18 +14,17 @@ This will show the player inside the iframe and will automatically resize.
 
 Both targetId and channelId will be provided to you on the creation of your Zender account. They can also be found through the Zender admin console.
 
-# Zender Lobby mechanism
-By default when no streams are public there will nothing to see.
-You can change this behaviour by creating a *lobby* stream : this stream will be active when no other streams are public.
-The player will switch from lobby and back when another stream becomes public
+### Zender Lobby mechanism
+When there is no lobby stream and no streams are public, there will be nothing to see. You can change this behaviour by creating a *lobby* stream : this stream will be active when no other streams are public.
+The Player will switch from lobby and back when another stream becomes public.
 
-# Example Code
-It all starts with a div element where you add zender iframe into.
-
-Then depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to use a different sizing. (use the correct class)
+## Example Code
+Create a `div` element, which will act as a wrapper and add the zender `iframe` into it.
+Depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to use a different sizing.
+Configure either the `zender-frame-wrapper-16-9` or `zender-frame-wrapper-9-16` as a class on the wrapper.
 
 ```html
-<div class="zender-frame-wrapper-9-16">
+<div class="zender-frame-wrapper zender-frame-wrapper-9-16">
 	<iframe src="about:blank" id="zender-frame" width="640" height="360" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 </div>
 ```
@@ -59,6 +58,8 @@ Then depending if your stream is 16:9 (landscape) or 9:16 (portrait) you want to
 }
 ```
 
+Configure the `src` of the `iframe` with some javascript after the [load event](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event). This prevents the player from slowing down other content on the page.
+
 ```javascript
 // Set zender-frame source depending on URL.
 window.addEventListener('load', function(e) {
@@ -66,12 +67,12 @@ window.addEventListener('load', function(e) {
 });
 ```
 
-# Listening to Zender Player events
-
-## Login via iframe messages
-If you are using the cookie provider for your login you can listen for a trigger-login message to execute some code in your surrounding webpage.
+## Communicating with the Zender Player *(exprimental)*
 
 ### Zender player → website
+
+**Example**
+If you are using the cookie provider for your login you can listen for a `trigger-login` message to execute some code in your surrounding webpage.
 
 ```javascript
 // Listen for incoming messages from zender-frame
@@ -97,71 +98,24 @@ window.addEventListener('message', function(e) {
 }, false);
 ```
 
-### Website → Zender player
+### Website → Zender Player
 
 ```javascript
 var iframe = document.getElementById('zender-frame');
 iframe.contentWindow.postMessage('logged-in', '*');
 ```
 
-## Listen to player events (Experimental)
-```html
+## Integrating login
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Parent Window</title>
-</head>
-<body>
+*The Zender Player supports social login providers such as Google, Facebook. This section is only applicable if you want to integrate the Player with your own authentication provider*
 
-    <h1>Parent Window</h1>
-    <p>Got Message:</p>
-    <div id="results"></div>
-    <br/>
+[Signed provider](SignedProvider.md) is an authentication mechanism that allows you to easily integrate your own existing authentication mechanism. For more details see the [Signed Provider Documentation](SignedProvider.md)
 
-    <script>
-        // addEventListener support for IE8
-        function bindEvent(element, eventName, eventHandler) {
-            if (element.addEventListener){
-                element.addEventListener(eventName, eventHandler, false);
-            } else if (element.attachEvent) {
-                element.attachEvent('on' + eventName, eventHandler);
-            }
-        }
-        var iframeSource = 'https://player2.zender.tv/<targetId>/<channelId>/streams';
-        // Create the iframe
-        var iframe = document.createElement('iframe');
-        iframe.setAttribute('src', iframeSource);
-        iframe.setAttribute('id', 'the_iframe');
-        iframe.style.width = 1024 + 'px';
-        iframe.style.height = 768 + 'px';
-        document.body.appendChild(iframe);
+**Example**
 
-        // Send a message to the child iframe
-        var iframeEl = document.getElementById('the_iframe'),
-            results = document.getElementById('results');
-
-        // Listen to message from child window
-        bindEvent(window, 'message', function (e) {
-            results.innerHTML = JSON.stringify(e.data);
-        });
-    </script>
-</body>
-</html>
-
-
-```
-
-# Logging in via Signed Provider
-The Zender Web Player understands social login providers such as Google,Facebook.
-Signed provider is authentication mechanism that allows you to easily integrate your own existing authentication mechanism.
-
-This authentication is passed like this : `https://live.yoursite.com?loginData=<signed token>`
-
-In this case the login data will be parsed by the zender player by examining its query string. In the example here, the parent page also receives the login data via its own query string; see the getLoginData function. The login data is then transmitted to the Zender iframe in the getPlayerUrl function.
-
-For more details see the [Signed Provider Documentation](SignedProvider.md)
+In this example, the parent page receives the login data via its own query string; see the `getLoginData` function. 
+The function assumes that the authentication is passed like this : `https://live.yoursite.com?loginData=<signed token>`.
+The login data is then transmitted to the Zender `iframe` in the form of a query string attached to the Player url, see the `getPlayerUrl` function.
 
 ```javascript
 function getLoginData() {
@@ -185,5 +139,3 @@ function getPlayerUrl() {
   return playerUrl;
 }
 ```
-
-
