@@ -16,7 +16,9 @@ OBS https://obsproject.com/ , Wirecast: https://www.telestream.net/wirecast/
 
 The ingest point is where the encoder sends its signal to so it can be delivered to the endusers (CDN). In order to player the stream there needs to be a compatible player.
 
-Note: Ingest streams are best restarted daily. When a stream is too long running the drift between audio/video packets can be too large to make the synching working well.
+Note: 
+- Ingest streams are best restarted daily. When a stream is too long running the drift between audio/video packets can be too large to make the synching working well.
+- Ingesting bandwidth has a cost associated, be sure to stop the stream when it's not needed
 
 # Encoder settings
 
@@ -50,15 +52,22 @@ When the machine does not have the required CPU power to run the stream in real 
 
 Our internal tests have shown that under some of these circumstances OBS has rendered increased latency of 1 to over 10 seconds.
 
+In addition to the generic settings from above, the following specific tunings can improve latency:
+
 To configure OBS – Go to Setting > Output > Select “Advanced”:
 -  Check “Use Custom Buffer Size”. Set the buffer size to 0.
 -  Set Tune to “zero latency”.	If you are on Windows - Go to Settings > Advanced -   Check New Network Code
 -  Check Low Latency Mode
 
+Note: you need to check advanced mode , otherwise the options are not visible in the interface
+
 To minimize CPU usage - try the follow alternatives
 - Lower the output resolution by going into Settings > Output and check Rescale Output.
 - Try half of 720p (640x360).
 - Try a faster CPU Usage Profile. Also found in Settings > Output
+
+Specific reminder: 
+- Set keyframe interval to : 1 second (otherwise the latency will have a long delay)
 
 # Latency & Drift:
 For ultra low Latency the latency varies around 2-3 seconds.
