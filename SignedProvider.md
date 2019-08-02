@@ -34,31 +34,76 @@ The Signed Provider needs additional backend configuration.
 
 # Signed Provider Token format
 ## Preparing the signedToken
-Let's say we have user with the following information:
-```
-{
-	"id":"<some internal customer userId>",
-	"first_name":"Patrick",
-	"last_name":"Debois",
-	"avatar":"https://...",
-}
-```
+Here is a sample code for nodejs to calculate the tokens
 
-The signature is based on a mutually agreed signature Template:
-```
-signature_date = `${new Date().getTime() / 1000}`; // seconds since epoch
-secretDecoded = Buffer.from(secret, "base64"); // secret is base64 first decode it
-hmac = crypto.createHmac( "sha1", secretDecoded); // prepare the hmac signing
-hmac.update(`${signature_date}_${token.id}_${token.first_name}_${token.last_name}`);
-signature = hmac.digest(`${signature_date}_${token.id}_${token.first_name}_${token.last_name}`);
-tokenData = {
-	"id":"<some internal customer userId>",
-	"first_name":"Patrick",
-	"last_name":"Debois",
-	"avatar":"https://...",
-	"signature_date":signature_date
+```javascript
+const crypto = require('crypto');  
+const querystring = require("querystring");
+
+// ArabMillionaire
+let secret = "<your-secret>";
+let targetId = "<your-target-id>";
+let channelId = "<your-channel-id>";
+
+function sign(user,secret) {
+    	const secretDecoded = Buffer.from(secret, "base64"); // the provided secret is base64, so it needs to be decoded first
+	const signature_date = new Date().getTime() / 1000; // seconds since epoch
+
+	const hmac = crypto.createHmac( "sha1", secretDecoded); // prepare the hmac signing
+	hmac.update(`${signature_date}_${user.id}_${user.first_name}_${user.last_name}`); // use the agreed signing template
+
+	const signature = hmac.digest("base64"); // calculate the signature , base64
+
+	userData = {
+		"id": user.id,
+		"first_name": user.first_name,
+		"last_name": user.last_name,
+		"avatar": user.avatar,
+		"signature_date": signature_date,
+		"signature" : signature,
+	};
+
+	signedToken = JSON.stringify(userData); // stringify the json structure
+	return signedToken;
+}
+
+// A sample user information
+let userInfo = {
+		"id":"testuserId",
+		"first_name": "Test",
+		"last_name": "User",
+		"avatar": "https://ui-avatars.com/api/?background=0D8ABC&color=fff"
 };
-signedToken = base64(JSON.stringify(tokenData)) // creates a string
+
+// Sign the user Info with the secret
+const token=sign(userInfo,secret);
+
+
+// Calculate the url
+
+const encryptedBytes = Buffer.from(token);
+encodedToken = encryptedBytes.toString('base64'); // base64 encode the token
+
+const params = querystring.stringify({signedToken: encodedToken });
+
+let url=`https://player2.zender.tv/${targetId}/channels/${channelId}?${params}`
+console.log("Direct Loginurl ===>");
+console.log();
+console.log(url);
+
+console.log();
+// Calculate the API call
+const body = {
+        provider: "signedProvider",
+        token: token,
+        targetId: targetId
+};
+
+console.log("API Call via the cli ===>");
+console.log();
+// Instructions to validate the generate token
+console.log(`curl https://api.zender.tv/v1/auth/login -d '${JSON.stringify(body)}' -H 'Content-Type: application/json' -v`);
+console.log();
 ```
 
 - signature_date is seconds since last epoch
