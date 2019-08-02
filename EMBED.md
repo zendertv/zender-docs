@@ -114,7 +114,7 @@ iframe.contentWindow.postMessage('logged-in', '*');
 **Example**
 
 In this example, the parent page receives the login data via its own query string; see the `getLoginData` function. 
-The function assumes that the authentication is passed like this : `https://live.yoursite.com?loginData=<signed token>`.
+The function assumes that the authentication is passed like this : `https://live.yoursite.com?signedToken=<signed token>`.
 The login data is then transmitted to the Zender `iframe` in the form of a query string attached to the Player url, see the `getPlayerUrl` function.
 
 ```javascript
@@ -134,7 +134,7 @@ function getLoginData() {
 function getPlayerUrl() {
   var playerUrl = <zenderPlayerUrl>; // without the /streams/<uid>part
   if (getLoginData()) {
-    return playerUrl + "?loginData=" + getLoginData();
+    return playerUrl + "?signedToken=" + getLoginData();
   }
   return playerUrl;
 }
