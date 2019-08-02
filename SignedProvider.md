@@ -40,7 +40,6 @@ Here is a sample code for nodejs to calculate the tokens
 const crypto = require('crypto');  
 const querystring = require("querystring");
 
-// ArabMillionaire
 let secret = "<your-secret>";
 let targetId = "<your-target-id>";
 let channelId = "<your-channel-id>";
