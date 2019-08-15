@@ -33,7 +33,9 @@ Note:
 	- also baseline has less latency
 - Keyframe interval : 1 second
 
-Note that higher bitrates & dimensions are supported but typically unnecessary for mobile devices playback. This will increase the cost due to additional bandwidth costs.
+Note:
+- higher bitrates & dimensions are supported but typically unnecessary for mobile devices playback. This will increase the cost due to additional bandwidth costs.
+- you can use <http://www.clocktab.com/> in your streaming software to easily display a clock
 
 # Encoder tunings
 ## AWS Elemental

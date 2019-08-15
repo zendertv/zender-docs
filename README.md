@@ -5,6 +5,7 @@ This repository contains the overall technical documentation of the Zender Platf
 ## Specific topics:
 
 Streaming:
+- [Advice on Studio Setup](studio-setup.md)
 - [Video Streaming Ingest to Zender](STREAMING.md)
 
 Authentication:
