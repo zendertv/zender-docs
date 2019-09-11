@@ -16,6 +16,7 @@ Analytics:
 - [Analytics tracked](ANALYTICS.md)
 
 API:
+- [Zender Public REST API](api/index.md)
 - [Retrieve Quiz information](QUIZ.md)
 - [Retrieve Stream information](STREAM.md)
 - [Retrieve Payout information](PAYOUT.md)
@@ -29,6 +30,5 @@ For individual SDK documentation refer to the individiual documentation:
 
 - web: [Embed Zender Player in Website](EMBED.md)
 - react native SDK : <https://github.com/zendertv/react-native-zender>
-- API : <https://api-docs.zender.tv>
 - iOS SDK : <https://github.com/zendertv/zender-ios-sdk>
 - android SDK : <https://github.com/zendertv/zender-android-sdk>
