@@ -58,6 +58,7 @@ API documentation for all the Zender Microservices
   * [Block User](#4-block-user)
   * [Unblock User](#5-unblock-user)
   * [TempBlock User](#6-tempblock-user)
+  * [Update Username](#7-update-username)
 
 * [Admin/Emojis](#adminemojis)
 
@@ -2033,7 +2034,49 @@ Status: Block User | Code: 200
 {"authenticated":true,"createdAt":"2017-11-29T08:33:42.090Z","flag":"blocked_2017-11-29T08:38:06.761Z","role":"user","targetId":"b8f99a0c-1383-4891-af7a-563b5903d390","provider":{"name":"facebook","uid":"1459394774070695"},"name":"Benoit Shapiro","externalId":"b8f99a0c-1383-4891-af7a-563b5903d390_1459394774070695","avatar":"https://graph.facebook.com/1459394774070695/picture?width=250&type=square","id":"8184fbdc-6861-4fc5-9944-e7860b95f4df","updatedAt":"2017-11-29T08:38:06.761Z"}
 ```
 
+### 7. Update username
 
+
+Blocks a user.
+
+
+***Endpoint:***
+
+```bash
+Method: PUT
+Type: RAW
+URL: {{authApiHost}}/v1/auth/users/{{externalUserId}}/username
+```
+
+
+***Headers:***
+
+| Key | Value | Description |
+| --- | ------|-------------|
+| Content-Type | application/json |  |
+
+
+
+***Body:***
+
+```js        
+{
+  "username": "abcde"
+}
+```
+
+
+
+***Responses:***
+
+
+Status: Update User | Code: 200
+
+
+
+```js
+{"createdAt":"2017-12-04T09:20:28.722Z","role":"user","targetId":"57699178-7d3c-4954-9f6c-6df8e7a164f6","provider":{"name":"facebook","uid":"fb-uid-one"},"name":"one","externalId":"57699178-7d3c-4954-9f6c-6df8e7a164f6_fb-uid-one","avatar":"https://graph.fb.com/avatar/one.png","id":"04049544-5b8b-4f1c-aa6b-fe96d999264b","email":"someone@somewhere.com","updatedAt":"2017-12-04T09:20:56.501Z", "username": "abcde"}
+```
 
 ## Admin/Emojis
 

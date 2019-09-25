@@ -11347,6 +11347,145 @@
 										}
 									]
 								},
+                                {
+                                  "name": "Update Username",
+                                  "event": [
+                                    {
+                                      "listen": "test",
+                                      "script": {
+                                        "type": "text/javascript",
+                                        "exec": [
+                                          "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                                          "var data = JSON.parse(responseBody);",
+                                          "tests[\"Response has stream id\"] = data.id !== null;",
+                                          "postman.setEnvironmentVariable(\"streamId\", data.id);"
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "request": {
+                                    "auth": {
+                                      "type": "bearer",
+                                      "bearer": [
+                                        {
+                                          "key": "token",
+                                          "value": "{{adminToken}}",
+                                          "type": "string"
+                                        }
+                                      ]
+                                    },
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n\t\"username\": \"abcde\"\n}"
+                                    },
+                                    "url": {
+                                      "raw": "{{authApiHost}}/v1/auth/users/{{externalUserId}}/username",
+                                      "host": [
+                                        "{{authApiHost}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "auth",
+                                        "users",
+                                        "{{externalUserId}}"
+                                      ]
+                                    },
+                                    "description": "Update the username of the specified User"
+                                  },
+                                  "response": [
+                                    {
+                                      "name": "Update Username",
+                                      "originalRequest": {
+                                        "method": "PUT",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "disabled": false
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n\t\"username\": \"abcde\"\n}"
+                                        },
+                                        "url": {
+                                          "raw": "{{authApiHost}}/v1/auth/users/{{externalUserId}}",
+                                          "host": [
+                                            "{{authApiHost}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "auth",
+                                            "users",
+                                            "{{externalUserId}}"
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Access-Control-Allow-Headers",
+                                          "value": "Content-Type, Authorization, Accept, Cache-Control, X-Requested-With",
+                                          "name": "Access-Control-Allow-Headers",
+                                          "description": ""
+                                        },
+                                        {
+                                          "key": "Access-Control-Allow-Methods",
+                                          "value": "GET,PUT,POST,DELETE",
+                                          "name": "Access-Control-Allow-Methods",
+                                          "description": ""
+                                        },
+                                        {
+                                          "key": "Access-Control-Allow-Origin",
+                                          "value": "*",
+                                          "name": "Access-Control-Allow-Origin",
+                                          "description": ""
+                                        },
+                                        {
+                                          "key": "Connection",
+                                          "value": "keep-alive",
+                                          "name": "Connection",
+                                          "description": ""
+                                        },
+                                        {
+                                          "key": "Content-Length",
+                                          "value": "392",
+                                          "name": "Content-Length",
+                                          "description": ""
+                                        },
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json; charset=utf-8",
+                                          "name": "Content-Type",
+                                          "description": ""
+                                        },
+                                        {
+                                          "key": "Date",
+                                          "value": "Mon, 04 Dec 2017 09:20:56 GMT",
+                                          "name": "Date",
+                                          "description": ""
+                                        },
+                                        {
+                                          "key": "X-Response-Time",
+                                          "value": "15ms",
+                                          "name": "X-Response-Time",
+                                          "description": ""
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "body": "{\"createdAt\":\"2017-12-04T09:20:28.722Z\",\"role\":\"user\",\"targetId\":\"57699178-7d3c-4954-9f6c-6df8e7a164f6\",\"provider\":{\"name\":\"facebook\",\"uid\":\"fb-uid-one\"},\"name\":\"one\",\"externalId\":\"57699178-7d3c-4954-9f6c-6df8e7a164f6_fb-uid-one\",\"avatar\":\"https://graph.fb.com/avatar/one.png\",\"id\":\"04049544-5b8b-4f1c-aa6b-fe96d999264b\",\"email\":\"someone@somewhere.com\",\"updatedAt\":\"2017-12-04T09:20:56.501Z\", \"username\":\"abcde\"}"
+                                    }
+                                  ]
+                                },
 								{
 									"name": "Block User",
 									"event": [
